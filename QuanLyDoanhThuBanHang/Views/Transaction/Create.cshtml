@@ -1,0 +1,119 @@
+﻿@model SalesManagementApp.Models.Transaction
+@{
+<h1>Nhập giao dịch mới</h1>
+}
+<style>
+    body {
+        background-color: lightsteelblue; /*màu nền xanh*/
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .container {
+        background-color: lavender;
+        border-radius: 4px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ nhẹ cho form */
+        padding: 15px;
+        margin-top: 20px;
+        max-width: 900px;
+        margin left: auto;
+        margin-right: auto;
+    }
+    h1 {
+        color: saddlebrown;
+        font-size: 40px;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .form-label {
+        font-weight: bold;
+        color: black;
+    }
+    .form-control {
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        font-size: 12px;
+        margin-bottom: 10px;
+        width: 100%
+    }
+
+    .form-control:focus {
+            border-color: #F06292; /* Màu viền khi trường được focus */
+            box-shadow: 0 0 5px rgba(240, 98, 146, 0.5); /* Hiệu ứng bóng khi trường được focus */
+    }
+
+    .row {
+        display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
+        flex-wrap: wrap; /* Cho phép các phần tử tự động xuống dòng nếu cần thiết */
+        justify-content: space-between; /* Căn giữa các phần tử trong hàng */
+    }
+    
+    .btn-submit {
+        background-color: coral; /* Màu nền hồng cho nút */
+        border: none; /* Xóa bỏ viền mặc định của nút */
+        color: white; /* Màu chữ trên nút */
+        /* padding: 10px 20px; /* Padding để nút có kích thước hợp lý */ */
+        font-size: 16px; /* Kích thước chữ trên nút */
+        cursor: pointer; /* Thay đổi con trỏ chuột khi di chuyển qua nút */
+        border-radius: 5px; /* Làm tròn các góc của nút */
+    }
+
+
+
+</style>
+<div class="container">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="TransactionCode" class="form-label">Mã giao dịch:</label>
+                <input type="text" class="form-control" id="TransactionCode" name="TransactionCode" value="@Model.TransactionCode" required />
+            </div>
+            <div class="col-md-6">
+                <label for="TransactionDate" class="form-label">Ngày giao dịch:</label>
+                <input type="date" class="form-control" id="TransactionDate" name="TransactionDate" value="@(Model?.TransactionDate != null ? Model.TransactionDate.ToString("yyyy-MM-dd") : "")" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Customer" class="form-label">Khách hàng:</label>
+                <input type="text" class="form-control" id="Customer" name="Customer" value="@Model.Customer" required />
+            </div>
+            <div class="col-md-6">
+                <label for="Product" class="form-label">Sản phẩm:</label>
+                <input type="text" class="form-control" id="Product" name="Product" value="@Model.Product" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Quantity" class="form-label">Số lượng:</label>
+                <input type="number" class="form-control" id="Quantity" name="Quantity" value="@Model.Quantity" required />
+            </div>
+            <div class="col-md-6">
+                <label for="UnitPrice" class="form-label">Đơn giá:</label>
+                <input type="number" class="form-control" id="UnitPrice" name="UnitPrice" value="@Model.UnitPrice" step="0.01" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Discount" class="form-label">Chiết khấu:</label>
+                <input type="number" class="form-control" id="Discount" name="Discount" value="@Model.Discount" step="0.01" required />
+            </div>
+            <div class="col-md-6">
+                <label for="Status" class="form-label">Trạng thái:</label>
+                <select class="form-control" id="Status" name="Status">
+                    <option value="Thành công">Thành công</option>
+                    <option value="Đang xử lý">Đang xử lý</option>
+                    <option value="Đã hủy">Đã hủy</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn-submit">Lưu giao dịch</button>
+            </div>
+        </div>
+    </form>
+</div>

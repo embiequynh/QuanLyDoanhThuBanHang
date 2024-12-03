@@ -1,0 +1,24 @@
+﻿@model SalesManagementApp.Models.Transaction
+
+@{
+    ViewData["Title"] = "Chi tiết giao dịch";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="mb-3">
+    <h4>Thông tin giao dịch</h4>
+    <ul>
+        <li><strong>Mã giao dịch:</strong> @Model.TransactionCode</li>
+        <li><strong>Tên khách hàng:</strong> @Model.Customer</li>
+        <li><strong>Tên sản phẩm:</strong> @Model.Product</li>
+        <li><strong>Ngày giao dịch:</strong> @Model.TransactionDate.ToString("dd/MM/yyyy")</li>
+        <li><strong>Đơn giá:</strong> @Model.UnitPrice.ToString("N0") VND</li>
+        <li><strong>Số lượng:</strong> @Model.Quantity</li>
+        <li><strong>Chiết khấu:</strong> @Model.Discount.ToString("P0")</li>
+        <li><strong>Thành tiền:</strong>@((Model.UnitPrice * Model.Quantity * (1 - Model.Discount)).ToString("N0")) VND</li>
+        <li><strong>Trạng thái:</strong> @Model.Status</li>
+    </ul>
+</div>
+
+<a href="@Url.Action("Index", "Transaction")" class="btn btn-secondary">Quay lại</a>

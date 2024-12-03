@@ -1,0 +1,57 @@
+﻿@model SalesManagementApp.Models.Transaction
+
+@{
+    ViewData["Title"] = "Sửa giao dịch";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label for="TransactionCode" class="form-label">Mã giao dịch:</label>
+        <input type="text" class="form-control" id="TransactionCode" name="TransactionCode" value="@Model.TransactionCode" required />
+    </div>
+    <div class="mb-3">
+        <label for="Customer" class="form-label">Khách hàng</label>
+        <input type="text" class="form-control" id="Customer" name="Customer" value="@Model.Customer" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="Product" class="form-label">Sản phẩm</label>
+        <input type="text" class="form-control" id="Product" name="Product" value="@Model.Product" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="Status" class="form-label">Trạng thái</label>
+        <select class="form-control" id="Status" name="Status" required>
+            <option value="Đang xử lý" selected="@((Model.Status == "Đang xử lý") ? "selected" : "")">Đang xử lý</option>
+            <option value="Thành công" selected="@((Model.Status == "Thành công") ? "selected" : "")">Thành công</option>
+            <option value="Đã huỷ" selected="@((Model.Status == "Đã huỷ") ? "selected" : "")">Đã huỷ</option>
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+        <label for="TransactionDate" class="form-label">Ngày giao dịch</label>
+        <input type="date" class="form-control" id="TransactionDate" name="TransactionDate" value="@Model.TransactionDate.ToString("yyyy-MM-dd")" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="Quantity" class="form-label">Số lượng</label>
+        <input type="number" class="form-control" id="Quantity" name="Quantity" value="@Model.Quantity" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="UnitPrice" class="form-label">Đơn giá</label>
+        <input type="number" class="form-control" id="UnitPrice" name="UnitPrice" value="@Model.UnitPrice" step="0.01" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="Discount" class="form-label">Chiết khấu</label>
+        <input type="number" class="form-control" id="Discount" name="Discount" value="@Model.Discount" step="0.01" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật giao dịch</button>
+    <a href="@Url.Action("Index", "Transaction")" class="btn btn-secondary">Quay lại</a>
+</form>

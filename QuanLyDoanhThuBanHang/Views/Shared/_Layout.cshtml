@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]Trang chủ</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/QuanLyDoanhThuBanHang.styles.css" />
+    <style>
+        body {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: darkblue; /* Màu sắc của tiêu đề */
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .btn-custom {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 20px;
+            background-color: cornflowerblue; /* Màu sắc của nút */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+            .btn-custom:hover {
+                background-color: gray;
+            }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Trang chủ</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!-- Các menu khác nếu cần -->
+                    </ul>
+                </div>
+
+                <a class="navbar-brand" href="@Url.Action("Index", "Transaction")" class="btn-custom">Theo dõi giao dịch</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!-- Các menu khác nếu cần -->
+                    </ul>
+                </div>
+
+                <a class="navbar-brand" href="@Url.Action("Revenue", "Transaction")" class="btn-custom">Quản lý doanh thu</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!-- Các menu khác nếu cần -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Phần thân của trang -->
+    @* <div class="container"> *@
+    @*     <h1>Chào mừng bạn đến với Phần mềm quản lý Doanh thu bán hàng</h1> *@
+    @*     <!-- Chức năng chính: Theo dõi giao dịch và Quản lý doanh thu --> *@
+    @*     <div class="btn-container"> *@
+    @*         <a href="@Url.Action("Index", "Transaction")" class="btn-custom">Theo dõi giao dịch</a> *@
+    @*         <a href="@Url.Action("Revenue", "Transaction")" class="btn-custom">Quản lý doanh thu</a> *@
+    @*     </div> *@
+    @* </div> *@
+
+    @RenderBody()  <!-- Đây là vị trí nơi nội dung từ các view sẽ được chèn vào -->
+</body>
+</html>

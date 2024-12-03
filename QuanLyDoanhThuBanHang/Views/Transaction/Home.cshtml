@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="container text-center mt-5">
+    <h1>Chào mừng đến với QuanLyDoanhThuBanHang</h1>
+    <p>Chọn một chức năng bên dưới để tiếp tục:</p>
+    <a href="~/Transaction/Index" class="btn btn-primary btn-custom">Theo dõi giao dịch</a>
+    <a href="~/Transaction/Revenue" class="btn btn-success btn-custom">Quản lý doanh thu</a>
+</div>
+
+<style>
+    body {
+        background-image: url('background-image.jpg'); /* Thay thế 'background-image.jpg' bằng đường dẫn đến hình ảnh nền của bạn */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .btn-custom {
+        padding: 15px 30px;
+        font-size: 18px;
+        margin: 20px;
+    }
+</style>

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<SalesManagementApp.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Danh sách giao dịch";
+}
+<style>
+    table td,
+    table th {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    thead th {
+        color: #fff;
+    }
+
+    .card {
+        border-radius: .5rem;
+    }
+
+    .table-scroll {
+        border-radius: .5rem;
+    }
+
+        .table-scroll table thead th {
+            font-size: 1.25rem;
+        }
+
+    thead {
+        top: 0;
+        position: sticky;
+    }
+    .option-table {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        width: 320px;
+    }
+
+    .th-table{
+        width: 320px;
+    }
+</style>
+<div style="margin-left: 20px;">
+    <h2 class="ml-4">@ViewData["Title"]</h2>
+
+    <!-- Nút nhập giao dịch mới -->
+    <a href="@Url.Action("Create", "Transaction")" class="btn btn-success ml-4 mb-3 mt-3 p-2">Nhập giao dịch mới</a>
+</div>
+
+<!-- Form tìm kiếm -->
+<form method="get" class="container-transaction p-4">
+    <div class="search-form mb-4">
+        <div class="row">
+            <div class="form-group col mb-3">
+                <label class="mb-2" for="search">Tìm kiếm khách hàng/sản phẩm:</label>
+                <input type="text" name="search" id="search" placeholder="Nhập tên khách hàng/sản phẩm" class="form-control">
+            </div>
+            <div class="form-group col">
+                <label class="mb-2" for="status">Trạng thái:</label>
+                <select name="status" id="status" class="form-control">
+                    <option  value="">Tất cả</option>
+                    <option value="Đang xử lý">Đang xử lý</option>
+                    <option value="Thành công">Thành công</option>
+                    <option value="Đã huỷ">Đã huỷ</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col">
+                <label class="mb-2" for="startDate">Ngày bắt đầu:</label>
+                <input type="date" name="startDate" id="startDate" class="form-control">
+            </div>
+            <div class="form-group col">
+                <label class="mb-2" for="endDate">Ngày kết thúc:</label>
+                <input type="date" name="endDate" id="endDate" class="form-control">
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+</form>
+
+<!-- Danh sách giao dịch -->
+<section class="intro p-4">
+    <div class="mask d-flex>
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 100%;">
+                                <table class="table table-striped mb-0">
+                                    <thead style="background-color: #002d72;">
+                                        <tr>
+                                            <th>Khách hàng</th>
+                                            <th>Sản phẩm</th>
+                                            <th>Ngày giao dịch</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá trị</th>
+                                            <th>Trạng thái</th>
+                                            <th class="th-table">Tuỳ chọn</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var transaction in Model)
+                                        {
+                                            <tr>
+                                                <td>@transaction.Customer</td>
+                                                <td>@transaction.Product</td>
+                                                <td>@transaction.TransactionDate.ToString("dd/MM/yyyy")</td>
+                                                <td>@transaction.Quantity</td>
+                                                <td>@((transaction.Quantity * transaction.UnitPrice * (1 - transaction.Discount)).ToString("N0")) VND</td> <!-- Sửa công thức tính tổng tiền -->
+                                                <td>@transaction.Status</td>
+                                                <td class="option-table">
+                                                    <a href="@Url.Action("Details", "Transaction", new { id = transaction.Id })" class="btn btn-info">Xem chi tiết</a>
+                                                    <a href="@Url.Action("Edit", "Transaction", new { id = transaction.Id })" class="btn btn-warning">Sửa</a>
+                                                    <a href="javascript:void(0);"
+                                                       class="btn btn-danger"
+                                                       onclick="confirmDelete(@transaction.Id)">Xoá</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- JavaScript để hiển thị hộp thoại xác nhận trước khi xóa -->
+<script>
+    function confirmDelete(deleteUrl) {
+        if (confirm("Bạn có chắc chắn muốn xóa giao dịch này không?")) {
+            window.location.href = deleteUrl;
+        }
+    }
+</script>
