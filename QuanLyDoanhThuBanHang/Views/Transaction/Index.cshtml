@@ -1,9 +1,16 @@
-﻿@model IEnumerable<SalesManagementApp.Models.Transaction>
+@model IEnumerable<SalesManagementApp.Models.Transaction>
 
 @{
-    ViewData["Title"] = "Danh sách giao dịch";
+    ViewData["Title"] = "DANH SÁCH GIAO DỊCH";
 }
 <style>
+    section.intro {
+        margin-top: 10px;
+    }
+
+    h2.ml-4 {
+        margin-top: 10px; /* Khoảng cách cho tiêu đề */
+    }
     table td,
     table th {
         text-overflow: ellipsis;
@@ -41,9 +48,19 @@
     .th-table{
         width: 320px;
     }
+
+    .btn-detail {
+        background-color: royalblue;
+        color: white;
+    }
+
+    .btn-edit {
+        background-color: dimgray;
+        color: white;
+    }
 </style>
 <div style="margin-left: 20px;">
-    <h2 class="ml-4">@ViewData["Title"]</h2>
+    <h2 class="ml-4"><b>@ViewData["Title"]</b></h2>
 
     <!-- Nút nhập giao dịch mới -->
     <a href="@Url.Action("Create", "Transaction")" class="btn btn-success ml-4 mb-3 mt-3 p-2">Nhập giao dịch mới</a>
@@ -113,8 +130,8 @@
                                                 <td>@((transaction.Quantity * transaction.UnitPrice * (1 - transaction.Discount)).ToString("N0")) VND</td> <!-- Sửa công thức tính tổng tiền -->
                                                 <td>@transaction.Status</td>
                                                 <td class="option-table">
-                                                    <a href="@Url.Action("Details", "Transaction", new { id = transaction.Id })" class="btn btn-info">Xem chi tiết</a>
-                                                    <a href="@Url.Action("Edit", "Transaction", new { id = transaction.Id })" class="btn btn-warning">Sửa</a>
+                                                    <a href="@Url.Action("Details", "Transaction", new { id = transaction.Id })" class="btn btn-detail">Xem chi tiết</a>
+                                                    <a href="@Url.Action("Edit", "Transaction", new { id = transaction.Id })" class="btn btn-edit">Sửa</a>
                                                     <a href="javascript:void(0);"
                                                        class="btn btn-danger"
                                                        onclick="confirmDelete(@transaction.Id)">Xoá</a>
