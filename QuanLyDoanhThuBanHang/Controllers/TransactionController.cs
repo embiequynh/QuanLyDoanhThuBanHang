@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SalesManagementApp.Data;
 using SalesManagementApp.Models;
@@ -138,7 +138,7 @@ namespace SalesManagementApp.Controllers
                 TransactionDate = DateTime.Now, // Ngày giao dịch mặc định là hôm nay
                 Customer = string.Empty,
                 Product = string.Empty,
-                Quantity = 1,
+                Quantity = 0,
                 UnitPrice = 0,
                 Discount = 0,
                 Status = "Đang xử lý"
@@ -224,14 +224,15 @@ namespace SalesManagementApp.Controllers
             // Tính tổng doanh thu và tổng chiết khấu
             // Tính tổng doanh thu = Tổng thành tiền của tất cả giao dịch
             var totalRevenue = transactionsList.Sum(t => t.Total);  // Tính tổng thành tiền
-
-            // Tính tổng chiết khấu (số lượng x đơn giá - tổng doanh thu)
             var totalDiscount = transactionsList.Sum(t => (t.Quantity * t.UnitPrice) - t.Total);
 
+            // Định dạng tiền tệ bằng VND
+            var cultureInfo = new System.Globalization.CultureInfo("vi-VN");
+            ViewBag.TotalRevenue = totalRevenue.ToString("C0", cultureInfo);  // Hiển thị tổng doanh thu dưới dạng tiền tệ VND
+            ViewBag.TotalDiscount = totalDiscount.ToString("C0", cultureInfo);  // Hiển thị tổng chiết khấu dưới dạng tiền tệ VND
 
-            // Gửi dữ liệu vào ViewBag để hiển thị trong View
-            ViewBag.TotalRevenue = totalRevenue.ToString("C");  // Hiển thị tổng doanh thu dưới dạng tiền tệ
-            ViewBag.TotalDiscount = totalDiscount.ToString("C");  // Hiển thị tổng chiết khấu dưới dạng tiền tệ
+            // Trả về danh sách giao dịch đã lọc cho view
+            return View(transactionsList);
 
             // Trả về danh sách giao dịch đã lọc cho view
             return View(transactionsList);
