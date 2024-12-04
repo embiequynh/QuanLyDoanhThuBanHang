@@ -1,24 +1,37 @@
-﻿@model SalesManagementApp.Models.Transaction
+@model SalesManagementApp.Models.Transaction
 
 @{
-    ViewData["Title"] = "Chi tiết giao dịch";
+
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container-sm mt-4" style="max-width: 600px;">
+    <h2 class="text-primary mb-4">@ViewData["Title"]</h2> <!-- Xóa lớp căn giữa -->
 
-<div class="mb-3">
-    <h4>Thông tin giao dịch</h4>
-    <ul>
-        <li><strong>Mã giao dịch:</strong> @Model.TransactionCode</li>
-        <li><strong>Tên khách hàng:</strong> @Model.Customer</li>
-        <li><strong>Tên sản phẩm:</strong> @Model.Product</li>
-        <li><strong>Ngày giao dịch:</strong> @Model.TransactionDate.ToString("dd/MM/yyyy")</li>
-        <li><strong>Đơn giá:</strong> @Model.UnitPrice.ToString("N0") VND</li>
-        <li><strong>Số lượng:</strong> @Model.Quantity</li>
-        <li><strong>Chiết khấu:</strong> @Model.Discount.ToString("P0")</li>
-        <li><strong>Thành tiền:</strong>@((Model.UnitPrice * Model.Quantity * (1 - Model.Discount)).ToString("N0")) VND</li>
-        <li><strong>Trạng thái:</strong> @Model.Status</li>
-    </ul>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Thông tin giao dịch</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Mã giao dịch:</strong> @Model.TransactionCode</li>
+                <li class="list-group-item"><strong>Tên khách hàng:</strong> @Model.Customer</li>
+                <li class="list-group-item"><strong>Tên sản phẩm:</strong> @Model.Product</li>
+                <li class="list-group-item"><strong>Ngày giao dịch:</strong> @Model.TransactionDate.ToString("dd/MM/yyyy")</li>
+                <li class="list-group-item"><strong>Đơn giá:</strong> @Model.UnitPrice.ToString("N0") VND</li>
+                <li class="list-group-item"><strong>Số lượng:</strong> @Model.Quantity</li>
+                <li class="list-group-item"><strong>Chiết khấu:</strong> @Model.Discount.ToString("P0")</li>
+                <li class="list-group-item">
+                    <strong>Thành tiền:</strong>
+                    @((Model.UnitPrice * Model.Quantity * (1 - Model.Discount)).ToString("N0")) VND
+                </li>
+                <li class="list-group-item"><strong>Trạng thái:</strong> @Model.Status</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a href="@Url.Action("Index", "Transaction")" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại
+        </a>
+    </div>
 </div>
-
-<a href="@Url.Action("Index", "Transaction")" class="btn btn-secondary">Quay lại</a>
