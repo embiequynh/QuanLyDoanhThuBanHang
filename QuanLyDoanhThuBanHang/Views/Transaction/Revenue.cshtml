@@ -1,5 +1,10 @@
-﻿@model IEnumerable<SalesManagementApp.Models.Transaction>
+@model IEnumerable<SalesManagementApp.Models.Transaction>
 <style>
+    h1 {
+        margin-top: 20px; /* Thêm khoảng cách từ trên xuống */
+    }
+
+    
     table td,
     table th {
         text-overflow: ellipsis;
@@ -31,7 +36,7 @@
         width: 100px;
     }
 </style>
-<h1>Quản lý doanh thu bán hàng</h1>
+<h1 style="margin-left: 20px;"><b>QUẢN LÝ DOANH THU BÁN HÀNG</b></h1>
 
 <!-- Form Lọc Dữ Liệu -->
 <form class="p-4" method="get">
@@ -61,9 +66,9 @@
 </form>
 
 <!-- Kết Quả Thống Kê -->
-<h2>Thống kê doanh thu</h2>
-<p><strong>Tổng doanh thu:</strong> @ViewBag.TotalRevenue</p>
-<p><strong>Tổng chiết khấu:</strong> @ViewBag.TotalDiscount</p>
+<h2 style="margin-left: 20px;">Thống kê doanh thu</h2>
+<p style="margin-left: 20px;"><strong>Tổng doanh thu:</strong> @ViewBag.TotalRevenue</p>
+<p style="margin-left: 20px;"><strong>Tổng chiết khấu:</strong> @ViewBag.TotalDiscount</p>
 
 <!-- Bảng Giao Dịch -->
 <section class="intro p-4">
