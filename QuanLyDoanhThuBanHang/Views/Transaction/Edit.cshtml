@@ -1,57 +1,164 @@
-﻿@model SalesManagementApp.Models.Transaction
+@model SalesManagementApp.Models.Transaction
 
-@{
-    ViewData["Title"] = "Sửa giao dịch";
-}
+<style>
+    body {
+        background: linear-gradient(to right, #e3f2fd, #e8f5e9);
+        font-family: "Poppins", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-<h2>@ViewData["Title"]</h2>
+    .container {
+        background-color: #ffffff;
+        border-radius: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin: 80px auto;
+        max-width: 800px;
+        animation: fadeIn 0.8s ease-in-out;
+    }
 
-<form method="post">
-    @Html.AntiForgeryToken()
-    <div class="mb-3">
-        <label for="TransactionCode" class="form-label">Mã giao dịch:</label>
-        <input type="text" class="form-control" id="TransactionCode" name="TransactionCode" value="@Model.TransactionCode" required />
-    </div>
-    <div class="mb-3">
-        <label for="Customer" class="form-label">Khách hàng</label>
-        <input type="text" class="form-control" id="Customer" name="Customer" value="@Model.Customer" required />
-    </div>
+    h1 {
+        color: #4a4a4a;
+        font-size: 32px;
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 25px;
+    }
 
-    <div class="mb-3">
-        <label for="Product" class="form-label">Sản phẩm</label>
-        <input type="text" class="form-control" id="Product" name="Product" value="@Model.Product" required />
-    </div>
+    .form-label {
+        font-weight: 600;
+        color: #333;
+    }
 
-    <div class="mb-3">
-        <label for="Status" class="form-label">Trạng thái</label>
-        <select class="form-control" id="Status" name="Status" required>
-            <option value="Đang xử lý" selected="@((Model.Status == "Đang xử lý") ? "selected" : "")">Đang xử lý</option>
-            <option value="Thành công" selected="@((Model.Status == "Thành công") ? "selected" : "")">Thành công</option>
-            <option value="Đã huỷ" selected="@((Model.Status == "Đã huỷ") ? "selected" : "")">Đã huỷ</option>
-        </select>
+    .form-control {
+        border: 1px solid #dcdcdc;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
 
-    </div>
+    .form-control:focus {
+        border-color: #64b5f6;
+        box-shadow: 0 4px 12px rgba(100, 181, 246, 0.4);
+        outline: none;
+    }
 
-    <div class="mb-3">
-        <label for="TransactionDate" class="form-label">Ngày giao dịch</label>
-        <input type="date" class="form-control" id="TransactionDate" name="TransactionDate" value="@Model.TransactionDate.ToString("yyyy-MM-dd")" required />
-    </div>
+    button {
+        background: #42a5f5;
+        color: #fff;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 20px;
+    }
 
-    <div class="mb-3">
-        <label for="Quantity" class="form-label">Số lượng</label>
-        <input type="number" class="form-control" id="Quantity" name="Quantity" value="@Model.Quantity" required />
-    </div>
+    button:hover {
+        background: #64b5f6;
+    }
 
-    <div class="mb-3">
-        <label for="UnitPrice" class="form-label">Đơn giá</label>
-        <input type="number" class="form-control" id="UnitPrice" name="UnitPrice" value="@Model.UnitPrice" step="0.01" required />
-    </div>
+    .row {
+        margin-bottom: 15px;
+    }
+</style>
 
-    <div class="mb-3">
-        <label for="Discount" class="form-label">Chiết khấu</label>
-        <input type="number" class="form-control" id="Discount" name="Discount" value="@Model.Discount" step="0.01" />
-    </div>
+<div class="container">
+    <h1>SỬA GIAO DỊCH</h1>
+    <form method="post">
+        @Html.AntiForgeryToken()
 
-    <button type="submit" class="btn btn-primary">Cập nhật giao dịch</button>
-    <a href="@Url.Action("Index", "Transaction")" class="btn btn-secondary">Quay lại</a>
-</form>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="TransactionCode" class="form-label">Mã giao dịch</label>
+                <input type="text"
+                       class="form-control"
+                       id="TransactionCode"
+                       name="TransactionCode"
+                       value="@Model.TransactionCode"
+                       readonly />
+            </div>
+            <div class="col-md-6">
+                <label for="TransactionDate" class="form-label">Ngày giao dịch</label>
+                <input type="date"
+                       class="form-control"
+                       id="TransactionDate"
+                       name="TransactionDate"
+                       value="@Model.TransactionDate.ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Customer" class="form-label">Khách hàng</label>
+                <input type="text"
+                       class="form-control"
+                       id="Customer"
+                       name="Customer"
+                       value="@Model.Customer"
+                       required />
+            </div>
+            <div class="col-md-6">
+                <label for="Product" class="form-label">Sản phẩm</label>
+                <input type="text"
+                       class="form-control"
+                       id="Product"
+                       name="Product"
+                       value="@Model.Product"
+                       required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Quantity" class="form-label">Số lượng</label>
+                <input type="number"
+                       class="form-control"
+                       id="Quantity"
+                       name="Quantity"
+                       value="@Model.Quantity"
+                       required />
+            </div>
+            <div class="col-md-6">
+                <label for="UnitPrice" class="form-label">Đơn giá</label>
+                <input type="number"
+                       class="form-control"
+                       id="UnitPrice"
+                       name="UnitPrice"
+                       value="@Model.UnitPrice"
+                       step="0.01"
+                       required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Discount" class="form-label">Chiết khấu</label>
+                <input type="number"
+                       class="form-control"
+                       id="Discount"
+                       name="Discount"
+                       value="@Model.Discount"
+                       step="0.01"
+                       required />
+            </div>
+            <div class="col-md-6">
+                <label for="Status" class="form-label">Trạng thái</label>
+                <select class="form-control" id="Status" name="Status" required>
+                    <option value="Thành công">Thành công</option>
+                    <option value="Đang xử lý">Đang xử lý</option>
+                    <option value="Đã hủy">Đã hủy</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit">Cập nhật giao dịch</button>
+            </div>
+        </div>
+    </form>
+</div>
